@@ -5,7 +5,7 @@ import dummyData from '../utils/dummyData';
 import { shortenAddress } from '../utils/shortenAddress';
 import useFetch from '../hooks/useFetch';
 
-const TransectionCard = ({ addressTo, addressFrom, timestamp, message, keyword, amount, url })=>{
+const TransectionCard = ({ addressTo, addressFrom, timeStamp, message, keyword, amount, url })=>{
     const gifUrl = useFetch({keyword})
 
     return (
@@ -39,7 +39,7 @@ const TransectionCard = ({ addressTo, addressFrom, timestamp, message, keyword, 
                 />
                 <div className='bg-black p-3 px-5 w-max rounded-3xl -mt-5 shadow-2xl '>
                     <p className='text-[#37c7da] font-bold'>
-                        {timestamp}
+                        {timeStamp}
                     </p>
                 </div>
             </div>
@@ -49,7 +49,7 @@ const TransectionCard = ({ addressTo, addressFrom, timestamp, message, keyword, 
 }   
 
 const Transections = ()=>{
-    const {currentAccount} = useContext(TransectionsContext)
+    const {currentAccount, transections} = useContext(TransectionsContext)
 
     return (
         <div className="flex w-full justify-center items-center 2xl:px-20 gradient-bg-transactions">
@@ -66,7 +66,7 @@ const Transections = ()=>{
                 )} 
 
                 <div className="flex flex-wrap justify-center items-center mt-10">
-                    {[...dummyData].reverse().map((transaction, i) => (
+                    {[...transections].reverse().map((transaction, i) => (                        
                         <TransectionCard key={i} {...transaction} />
                     ))}
                 </div>                    

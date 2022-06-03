@@ -44,7 +44,7 @@ export const TransectionProvider = ({ children }) => {
 
             }))
             setTransections(structuredTransections);
-            console.log(structuredTransections);
+            //console.log(structuredTransections[0]);
 
 
         } catch (error) {
@@ -60,7 +60,7 @@ export const TransectionProvider = ({ children }) => {
             if(accounts.length){
                 setCurrentAccount(accounts[0])
                 
-                //getAllTransections
+                //getAllTransections from the blockchain.
                 getAllTransections();
                 
             }else{
@@ -130,8 +130,9 @@ export const TransectionProvider = ({ children }) => {
 
             const transectionsCount = await transectionsContract.getTransectionCount();
 
-            setTransectionCount(transectionsCount.toNumber());
-
+            setTransectionCount(transectionsCount.toNumber());  
+            
+            window.location.reload();
 
         } catch (error) {
             console.log(error);
@@ -145,7 +146,7 @@ export const TransectionProvider = ({ children }) => {
     }, []);
 
     return(
-        <TransectionsContext.Provider value={{connectWallet, currentAccount, formData, sendTransection, handleChange}}>
+        <TransectionsContext.Provider value={{connectWallet,transections, currentAccount, formData, sendTransection, handleChange, isLoading}}>
             {children}
         </TransectionsContext.Provider>
     );
