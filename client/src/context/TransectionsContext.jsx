@@ -20,12 +20,37 @@ export const TransectionProvider = ({ children }) => {
     const [formData, setFormData] = useState({addressTo:'', amount: '', keyword: '', message:''});
     const [isLoading, setIsLoading] = useState(false)
     const [transectionCount, setTransectionCount] = useState(localStorage.getItem('transectionCount'));
-
+    const [transections, setTransections] = useState([])
 
     const handleChange = (e, name) => {
         setFormData((prevState)=>({ ...prevState, [name]:e.target.value}));
     }
 
+    const getAllTransections = async () => {
+        try {
+            if(!ethereum) return alert("Please Install metamask."); // check if there is no metamask
+            const transectionsContract = getEthereumContract();
+
+            const availableTrasections = await transectionsContract.getAllTransections();
+
+            //to get all the transections in a proper structure
+            const structuredTransections = await availableTrasections.map((transection)=>({
+                addressTo: transection.recieve,
+                addressFrom: transection.sender,
+                timeStamp: new Date(transection.timestamp.toNumber() * 1000).toLocaleString(),
+                message: transection.message,
+                keyword: transection.keyword,
+                amount: parseInt(transection.amount._hex)/(10 ** 18)
+
+            }))
+            setTransections(structuredTransections);
+            console.log(structuredTransections);
+
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const checkIfWalledIsConnected = async () => {
         try {
@@ -34,9 +59,9 @@ export const TransectionProvider = ({ children }) => {
             const accounts = await ethereum.request({ method: 'eth_accounts'}); //request to metamask account
             if(accounts.length){
                 setCurrentAccount(accounts[0])
-
                 
                 //getAllTransections
+                getAllTransections();
                 
             }else{
                 console.log("No Accounts Found!")
@@ -47,6 +72,19 @@ export const TransectionProvider = ({ children }) => {
             throw new Error("No ethereum Object.");
         }
     }
+
+    const checkIfTransectionsExist = async () => {
+        try {
+            const transectionsContract = getEthereumContract();        
+            const transectionsCount = await transectionsContract.getTransectionCount();
+
+            window.localStorage.setItem("transectionsCount", transectionsCount)
+        } catch (error) {
+            console.log(error);
+            throw new Error("No ethereum Object.");
+        }
+    }
+
 
     const connectWallet = async () => {
         try {
@@ -103,6 +141,7 @@ export const TransectionProvider = ({ children }) => {
 
     useEffect(()=>{
         checkIfWalledIsConnected();
+        checkIfTransectionsExist();
     }, []);
 
     return(
