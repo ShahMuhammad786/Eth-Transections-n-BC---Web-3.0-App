@@ -52,7 +52,7 @@ const Transections = ()=>{
     const {currentAccount, transections} = useContext(TransectionsContext)
 
     return (
-        <div className="flex w-full justify-center items-center 2xl:px-20 gradient-bg-transactions">
+        <div className="flex w-full justify-center items-center 2xl:px-20 gradient-bg-transactions overflow-y-auto h-100">
             <div className='flex flex-col md:pd-12 py-12 px-4'>
 
                 {currentAccount ?(
