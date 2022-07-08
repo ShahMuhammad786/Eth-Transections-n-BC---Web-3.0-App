@@ -3,15 +3,25 @@ The application consists of front end which is build using react and used some a
 The Application also has a smart contract which is build in the solidity.
 
 Tools and Environments used in the development and deployment process:
+
 *-*React (for the front end)
+
 *-*Vitejs (for React app build)
+
 *-*Solidity (for smart contracts)
+
 *-*Tailwind CSS (for Styling)
+
 *-*Goerli Testnet (Test network for deployment of SC)
+
 *-*Alchemy (blockchain development platform)
+
 *-*Hardhat (Ethereum development environment for professionals)
+
 *-*Netlify (for site deployment)
+
 *-*developer.giphy.com (for the gifs integrations)
+
 *-*Metamask integration (a ethereum wallet)
 
 Functionalities:
