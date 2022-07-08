@@ -2,7 +2,7 @@
 The application consists of front end which is build using react and used some advanced react concepts like useContext API and advanced states managements etc. and the Tailwind CSS for the styling.
 The Application also has a smart contract which is build in the solidity.
 
-Tools and Environments used in the development and deployment process:
+# Tools and Environments used in the development and deployment process:
 
 *-*React (for the front end)
 
@@ -24,11 +24,15 @@ Tools and Environments used in the development and deployment process:
 
 *-*Metamask integration (a ethereum wallet)
 
-Functionalities:
+# Functionalities:
 *-*can connect to metamast wallet
+
 *-*use to transfer the ethereum from one address to another and the transection can be verified on etherscan
+
 *-*fetch the gifs from the giphy by inputing a keyword
+
 *-*saving the transection record in the blockchain forever with timestamp which can never be altered.
+
 *-*can show all the latest transections occured.
 
 The link to the site: https://transethers.netlify.app/
